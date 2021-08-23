@@ -1,0 +1,21 @@
+<form class="btn" style="float: right" action="/rental_agencies/signout" method="get">
+  <button type="submit">
+      Signout
+  </button>
+</form>
+<center>
+    <h3>Update car info</h3>
+    <div id="myForm">
+        <form action="/rental_agencies/editInfo" class="form-container" method="post">
+          <label for="name"><b>Vehicle No:</b></label>
+          <input type="text" value="<%=result.vehicle_no%>" placeholder="Enter vehicle no." name="vehicle_no" required>
+          <label for="address"><b>Vehicle Model:</b></label>
+          <input type="text" value="<%=result.vehicle_model%>" placeholder="Enter vehicle model" name="vehicle_model" required>
+          <label for="contact"><b>Seating capacity:</b></label>
+          <input type="text" value="<%=result.seating_capacity%>" placeholder="Enter seating capacity" name="seating_capacity" required>
+          <label for="unm"><b>Rent:</b></label>
+          <input type="text" value="<%=result.rent%>" placeholder="Enter rent" name="rent" required>
+          <button type="submit" class="btn"><b>Submit</b></button>
+        </form>
+      </div>
+</center>

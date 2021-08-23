@@ -1,0 +1,18 @@
+<html>
+<body>
+<form class="btn" style="float: right" action="/users/signout" method="get">
+        <button type="submit">
+                Signout
+        </button>
+</form>
+<center>
+<h3>Customer Profile</h3>
+<h4>Name: <%=result2.name%>&nbsp;&nbsp;&nbsp; Address: <%=result2.address%>&nbsp;&nbsp;&nbsp; Contact no: <%=result2.contact%>&nbsp;&nbsp;&nbsp; Email Id:<%=result2.email%></h4>
+<br><br>
+<div>
+        <i><button><a href="/users/viewBookingHistory"><b>View booking history</b></a></button></i>
+        <i><button><a href="/users/book"><b>Book a new car</b></a></button></i>
+</div>
+</center>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<form class="btn" style="float: right" action="/rental_agencies/signout" method="get">
+    <button type="submit">
+        Signout
+    </button>
+  </form>
+<center>
+    <h2>Available cars</h2><br><br>
+</center>
+<div class="container">
+    <% if(result.length>0){ %>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th style="text-align:center">Vehicle No.</th>
+            <th style="text-align:center">Vehicle model</th>
+            <th style="text-align:center">Seating capacity</th>
+            <th style="text-align:center">Rent</th>
+            <th style="text-align:center">Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% result.forEach(function(x){ %>
+                <tr>
+                    <td><%=x.vehicle_no%></td>
+                    <td><%=x.vehicle_model%></td>
+                    <td><%=x.seating_capacity%></td>
+                    <td><%=x.rent%></td>
+                    <td><%=x.status%></td>
+                    <td><form method="POST" action="/rental_agencies/edit">
+                        <input type="hidden" value="<%=x.vehicle_no%>" name="vehicle_no">
+                        <button type="submit">Edit</button>
+                    </form></td>
+                    <td><form method="POST" action="/rental_agencies/delete">
+                        <input type="hidden" value="<%=x.vehicle_no%>" name="vehicle_no">
+                        <button type="submit">Delete</button>
+                    </form></td>
+                </tr>
+            <%})%>
+            </tbody>
+    </table>
+    <%}else{%>
+        <center>
+        <h4>No cars available</h4>
+        </center>
+        <%}%>
+    </div>

@@ -1,0 +1,45 @@
+<html>
+<body>
+  <form class="btn" style="float: right" action="/rental_agencies/signout" method="get">
+    <button type="submit">
+        Signout
+    </button>
+  </form>
+<center>
+<h3>Agency Profile</h3>
+<h4>Name: <%=result2.name%>&nbsp;&nbsp;&nbsp; Address: <%=result2.address%>&nbsp;&nbsp;&nbsp; Contact no: <%=result2.contact%>&nbsp;&nbsp;&nbsp; Email Id:<%=result2.email%></h4>
+<br><br>
+<div>
+          <i><button onclick="openForm()"><b>Add cars</b></button></i>
+        <i><button><a href="/rental_agencies/viewAvailable"><b>View available cars</b></a></button></i>
+        <i><button><a href="/rental_agencies/viewBooked"><b>View booked cars</b></a></button></i>
+</div>
+    <div class="form-popup" id="myForm">
+        <form action="/rental_agencies/addCar" class="form-container" method="post">
+          <label for="name"><b>Vehicle No:</b></label>
+          <input type="text" placeholder="Enter vehicle no." name="vehicle_no" required>
+          <label for="address"><b>Vehicle Model:</b></label>
+          <input type="text" placeholder="Enter vehicle model" name="vehicle_model" required>
+          <label for="contact"><b>Seating capacity:</b></label>
+          <input type="text" placeholder="Enter seating capacity" name="seating_capacity" required>
+          <label for="unm"><b>Rent:</b></label>
+          <input type="text" placeholder="Enter rent" name="rent" required>
+          <input type="hidden" value="Available" name="status">
+          <button type="submit" class="btn"><b>Submit</b></button>
+          <button type="button" class="btn cancel" onclick="closeForm()"><b>Close</b></button>
+        </form>
+      </div>
+</center>
+<script>
+    function openForm() {
+      document.getElementById("myForm").style.display = "block";
+    }
+    function openForm2() {
+      document.getElementById("myForm2").style.display = "block";
+    }
+    function closeForm() {
+      document.getElementById("myForm").style.display = "none";
+    }
+</script>
+</body>
+</html>

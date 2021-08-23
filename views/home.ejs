@@ -1,0 +1,150 @@
+<html>
+    <head>
+      
+    </head>
+<body>
+    <center><h1><font color="black" face="times new roman"><i><b>Car rental agency welcomes you!</b></i></font></h1></center><br>
+    <div id="container">
+    <ul class="menu">
+      <li>
+        <i><b><a href="#">Signup</a></b></i>
+    <ul>
+        <!---<li><b><a href="#">As a customer</a></b></li>
+        <li><b><a href="#">As a car rental agency</a></b></li>-->
+        <li><button class="open-button" onclick="openFormReg1()"><b>As a customer</b></button></li>
+    <li><button class="open-button" onclick="openFormReg2()"><b>As a car rental agency</b></button></li>
+     </ul>
+     </li>
+     <li>
+      <i><b><a href="#">Signin</a></b></i>
+  <ul>
+    <li><button class="open-button" onclick="openForm1()"><b>As a customer</b></button></li>
+    <li><button class="open-button" onclick="openForm2()"><b>As a car rental agency</b></button></li>
+   </ul>
+   </li>
+      </ul>
+      </div>
+      <center>
+        <div class="form-popup" id="myForm1">
+          <form action="/users/signin" class="form-container" method="post">
+            <label for="unm"><b>Username:</b></label>
+            <input type="text" placeholder="Enter username" name="unm" required>
+            <label for="upass"><b>Password:</b></label>
+            <input type="password" placeholder="Enter Password" name="upass" required>
+            <input type="hidden" value="c" name="utype">
+            <button type="submit" class="btn"><b>Submit</b></button>
+            <button type="button" class="btn cancel" onclick="closeForm1()"><b>Close</b></button>
+          </form>
+        </div>
+        <div class="form-popup" id="myForm2">
+          <form action="/rental_agencies/signin" class="form-container" method="post">
+            <label for="unm"><b>Username:</b></label>
+            <input type="text" placeholder="Enter username" name="unm" required>
+            <label for="upass"><b>Password:</b></label>
+            <input type="password" placeholder="Enter Password" name="upass" required>
+            <input type="hidden" value="r" name="utype">
+            <button type="submit" class="btn"><b>Submit</b></button>
+            <button type="button" class="btn cancel" onclick="closeForm2()"><b>Close</b></button>
+          </form>
+        </div>
+        <div class="form-popup" id="myFormReg1">
+          <form action="/users/signup" class="form-container" method="post">
+            <label for="name"><b>Name:</b></label>
+            <input type="text" placeholder="Enter username" name="name" required>
+            <label for="address"><b>Address:</b></label>
+            <input type="text" placeholder="Enter address" name="address" required>
+            <label for="contact"><b>Contact no.:</b></label>
+            <input type="text" placeholder="Enter contact no." name="contact" required>
+            <label for="unm"><b>Email Id:</b></label>
+            <input type="text" placeholder="Enter email id" name="unm" required>
+            <label for="upass"><b>Create Password:</b></label>
+            <input type="password" placeholder="Enter Password" name="upass" required>
+            <label for="cupass"><b>Confirm Password:</b></label>
+            <input type="password" placeholder="Re enter Password" name="cupass" required>
+            <button type="submit" class="btn"><b>Submit</b></button>
+            <button type="button" class="btn cancel" onclick="closeFormReg1()"><b>Close</b></button>
+          </form>
+        </div>
+        <div class="form-popup" id="myFormReg2">
+          <form action="/rental_agencies/signup" class="form-container" method="post">
+            <label for="name"><b>Agency name:</b></label>
+            <input type="text" placeholder="Enter username" name="name" required>
+            <label for="address"><b>Address:</b></label>
+            <input type="text" placeholder="Enter address" name="address" required>
+            <label for="contact"><b>Contact no.:</b></label>
+            <input type="text" placeholder="Enter contact no" name="contact" required>
+            <label for="unm"><b>Email Id:</b></label>
+            <input type="text" placeholder="Enter email id" name="unm" required>
+            <label for="upass"><b>Create Password:</b></label>
+            <input type="password" placeholder="Enter Password" name="upass" required>
+            <label for="cupass"><b>Confirm Password:</b></label>
+            <input type="password" placeholder="Re enter Password" name="cupass" required>
+            <button type="submit" class="btn"><b>Submit</b></button>
+            <button type="button" class="btn cancel" onclick="closeFormReg2()"><b>Close</b></button>
+          </form>
+        </div>
+        <br><br>
+        <h3>List of available cars:</h3>
+        <table class="table table-hover">
+          <thead>
+          <tr>
+              <th style="text-align:center">Vehicle No.</th>
+              <th style="text-align:center">Vehicle model</th>
+              <th style="text-align:center">Seating capacity</th>
+              <th style="text-align:center">Rent</th>
+              <th style="text-align:center">Status</th>
+              </tr>
+              </thead>
+              <tbody>
+              <% result.forEach(function(x){ %>
+                  <tr>
+                      <td><%=x.vehicle_no%></td>
+                      <td><%=x.vehicle_model%></td>
+                      <td><%=x.seating_capacity%></td>
+                      <td><%=x.rent%></td>
+                      <td><%=x.status%></td>
+                      <td>
+                        <form method="POST" action="/home/viewAgencyDetails">
+                          <input type="hidden" value="<%=x.agency_id%>" name="agency_id">
+                          <input type="hidden" value="<%=x.vehicle_no%>" name="vehicle_no">
+                          <input type="hidden" value="<%=x.vehicle_model%>" name="vehicle_model">
+                          <input type="hidden" value="<%=x.seating_capacity%>" name="seating_capacity">
+                          <input type="hidden" value="<%=x.rent%>" name="rent">
+                          <button type="submit">View agency details</button>
+                        </form>
+                      </td>  
+                  </tr>
+              <%})%>
+              </tbody>
+      </table>
+      <h4>Please note that a car can be booked only after signup/signin.</h4>
+      </center>
+    <script>
+      
+    function openForm1() {
+      document.getElementById("myForm1").style.display = "block";
+    }
+    function openForm2() {
+        document.getElementById("myForm2").style.display = "block";
+      }
+      function openFormReg1() {
+      document.getElementById("myFormReg1").style.display = "block";
+    }
+    function openFormReg2() {
+        document.getElementById("myFormReg2").style.display = "block";
+      }
+    function closeForm1() {
+      document.getElementById("myForm1").style.display = "none";
+    }
+    function closeForm2() {
+      document.getElementById("myForm2").style.display = "none";
+    }
+    function closeFormReg1() {
+      document.getElementById("myFormReg1").style.display = "none";
+    }
+    function closeFormReg2() {
+      document.getElementById("myFormReg2").style.display = "none";
+    }
+    </script>
+</body>
+</html>

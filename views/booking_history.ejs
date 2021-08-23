@@ -1,0 +1,29 @@
+<form class="btn" style="float: right" action="/users/signout" method="get">
+    <button type="submit">
+            Signout
+    </button>
+</form>
+<center>
+    <h3>Booking History:</h3>
+            <table class="table table-hover">
+              <thead>
+              <tr>
+                  <th style="text-align:center">Vehicle no.</th>
+                  <th style="text-align:center">No. of days</th>
+                  <th style="text-align:center">Start date</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <% result.forEach(function(x){ %>
+                      <tr>
+                          <td><%=x.vehicle_no%></td>
+                          <td><%=x.no_of_days%></td>
+                          <td><%=x.start_date%></td>
+                          <td>
+                            <button><a href="/users/viewOtherInfo?vehicle_no=<%=x.vehicle_no%>">View other details</a></button>
+                        </td> 
+                      </tr>
+                  <%})%>
+                  </tbody>
+          </table>
+          </center>
