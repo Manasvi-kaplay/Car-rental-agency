@@ -1,6 +1,8 @@
+//This file contains all the API's for users
 var express=require("express");
 var router=express.Router();
 var allQueries=require("../model/allQueries")
+//API for registering new users
 router.post('/signup',function(req,res){
     console.log("req.body",req.body);
     allQueries.signup("customers",req.body,function(err,result){
@@ -19,6 +21,7 @@ router.post('/signup',function(req,res){
         }
     })
 })
+//API for signing in existing users
 router.post('/signin',function(req,res){
     console.log("req.body signin",req.body)
     allQueries.signin("customers",req.body,function(err,result){
@@ -45,6 +48,7 @@ router.post('/signin',function(req,res){
             }
             else{
                 var pagedata={"title":"Customer Login","pagename":"user_login","msg":"Incorrect password!"}
+                //calls the page name mentioned in "pagename" key
                 res.render("layout",pagedata);
             }
         }
@@ -54,11 +58,13 @@ router.post('/signin',function(req,res){
         }
     })
 })
+//API for signing out users
 router.get('/signout', function(req, res){
     allQueries.viewAll("cars",function(err,result){
         if(err){
             var pagedata={"title":"Home page","pagename":"home"};
             res.render("layout",pagedata);
+            //killing the existing session
             req.session.destroy();
         }
         if(result){
@@ -68,6 +74,7 @@ router.get('/signout', function(req, res){
         }
     })
 });
+//API for displaying the form which has to be filled in order to book a car
 router.get('/book',function(req,res){
     allQueries.viewAll("cars",function(err,result){
         if(err){
@@ -80,6 +87,7 @@ router.get('/book',function(req,res){
     
 })
 })
+//API for retrieving the vehicle_no of a vehicle which is to be booked
 router.get('/bookCar',function(req,res){
     if(req.query.vehicle_no){
        var pagedata={"title":"Book my car","pagename":"book",vehicle_no:req.query.vehicle_no};
@@ -89,6 +97,7 @@ router.get('/bookCar',function(req,res){
         res.send("Car cannot be booked at the moment!");
     }
 })
+//API for actually booking a car(updating the status and adding an entry in booked_cars table) 
 router.post('/book',function(req,res){
     console.log("req.body    ",req.body);
     allQueries.bookCar("booked_cars",{vehicle_no:req.body.vehicle_no,user_id:req.session.userid,start_date:req.body.start_date,no_of_days:req.body.no_of_days},function(err,result){
@@ -107,6 +116,7 @@ router.post('/book',function(req,res){
         }
     })
 })
+//API for enabling users to view details of a particular agency who has posted a car
 router.post('/viewAgencyDetails',function(req,res){
     //console.log("req.body: ",req.body);
     allQueries.getProfile("rental_agencies",{id:req.body.agency_id},function(err,result){
@@ -120,9 +130,11 @@ router.post('/viewAgencyDetails',function(req,res){
         }
     })
 })
+//API for viewing all the cars booked till now by any user
 router.get('/viewBookingHistory',function(req,res){
     allQueries.viewBookedCarsByUser("booked_cars",{user_id:req.session.userid},function(err,result){
         if(err){
+            console.log("error in viewing booking history..",err);
             res.send("Try again later!");
         }
         if(result){
@@ -131,9 +143,11 @@ router.get('/viewBookingHistory',function(req,res){
         }
     })
 })
+//API for viewing car info and agency info
 router.get('/viewOtherInfo',function(req,res){
     allQueries.getCar("cars",{vehicle_no:req.query.vehicle_no},function(err,result){
         if(err){
+            console.log("error in viewing other info..",err);
             res.send("Try again later!");
         }
         if(result){

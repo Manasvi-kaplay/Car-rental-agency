@@ -1,8 +1,10 @@
+//This file contains all the API's for rental_agencies
 var express=require("express");
 var router=express.Router();
 var allQueries=require("../model/allQueries");
+//API to register new rental agencies
 router.post('/signup',function(req,res){
-    //console.log("req.body",req.body);
+    //Calls the database queries file "allQueries" for adding new user's details in the database
     allQueries.signup("rental_agencies",req.body,function(err,result){
         if(err){
             if(err.code=="ER_DUP_ENTRY"){
@@ -19,19 +21,16 @@ router.post('/signup',function(req,res){
         }
     })
 })
+//API to login existing rental agencies
 router.post('/signin',function(req,res){
-    //console.log("req.body signin",req.body)
     allQueries.signin("rental_agencies",req.body,function(err,result){
         if(err){
             res.send(err)
         }
-        //console.log("result from db..",result);
         if(result.length>0){
             if(result[0].password==req.body.upass){
                 req.session.email=result[0].email;
                 req.session.agencyid=result[0].id;
-               // console.log("req.session here",req.session);
-                //console.log("data retrieved ",result[0].id)
                 allQueries.getProfile("rental_agencies",{id:result[0].id},function(err2,result2){
                     if(err2){
                         res.send("Please try again later!")
@@ -54,6 +53,7 @@ router.post('/signin',function(req,res){
         }
     })
 })
+//API for signing out users
 router.get('/signout', function(req, res){
     allQueries.viewAll("cars",function(err,result){
         if(err){
@@ -68,6 +68,7 @@ router.get('/signout', function(req, res){
         }
     })
 });
+//API for enabling existing rental agencies to add new cars
 router.post('/addCar',function(req,res){
     obj=req.body
     obj.agency_id=req.session.agencyid;
@@ -81,6 +82,7 @@ router.post('/addCar',function(req,res){
         }
     })
 })
+//API for showing which cars posted by a particular agency are currently available
 router.get('/viewAvailable',function(req,res){
     obj={agency_id:req.session.agencyid}
     //console.log("obj%%",obj);
@@ -94,6 +96,7 @@ router.get('/viewAvailable',function(req,res){
         }
     })
 })
+//API for showing which cars posted by a particular agency are currently booked
 router.get('/viewBooked',function(req,res){
     obj={agency_id:req.session.agencyid}
     //console.log("obj%%%%%%",obj);
@@ -107,6 +110,7 @@ router.get('/viewBooked',function(req,res){
         }
     })
 })
+//API for displaying current details which are to be editted
 router.post('/edit',function(req,res){
     //console.log("hellooo",req.session);
     req.session.vehicle_no=req.body.vehicle_no;
@@ -120,6 +124,7 @@ router.post('/edit',function(req,res){
         }
     })
 })
+//post API for actually updating details of a car
 router.post('/editInfo',function(req,res){
     var where={"vehicle_no":req.body.vehicle_no};
     console.log("hellooo",req.body);
@@ -132,6 +137,7 @@ router.post('/editInfo',function(req,res){
         }
     })
 })
+//API for deleting a car information
 router.post('/delete',function(req,res){
     //console.log("hiiii",req.body);
     allQueries.deleteCar("cars",{vehicle_no:req.body.vehicle_no},function(err,result){
@@ -143,6 +149,7 @@ router.post('/delete',function(req,res){
         }
     })
 })
+//API for displaying customer details of a customer who has booked a particular car
 router.post('/viewCustomerInfo',function(req,res){
     allQueries.viewCustomerInfoByAgency({vehicle_no:req.body.vehicle_no},function(err,result){
         if(err){

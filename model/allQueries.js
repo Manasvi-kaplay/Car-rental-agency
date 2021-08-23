@@ -1,4 +1,6 @@
+//this file contains all the database queries used in the project. database used: mysql
 var connection=require("../config/connection");
+//db query for adding new user/rental agency
 module.exports.signup=function(table_name,obj,cb){
     connection.getConnection(function(err){
         if(err){
@@ -8,6 +10,7 @@ module.exports.signup=function(table_name,obj,cb){
         connection.query(query,cb);
     })
 }
+//db query for verifying existing user/rental_agency
 module.exports.signin=function(table_name,obj,cb){
     connection.getConnection(function(err){
         if(err){
@@ -18,6 +21,7 @@ module.exports.signin=function(table_name,obj,cb){
         connection.query(query,cb);
     })
 }
+//db query for adding new car
 module.exports.addCar=function(table_name,obj,cb){
     connection.getConnection(function(err){
         if(err){
@@ -28,6 +32,7 @@ module.exports.addCar=function(table_name,obj,cb){
         connection.query(query,cb);
     })
 }
+//db query for fetching profile of a particular user/rental_agency after signing in
 module.exports.getProfile=function(table_name,obj,cb){
     connection.getConnection(function(err){
         if(err){
@@ -38,6 +43,7 @@ module.exports.getProfile=function(table_name,obj,cb){
         connection.query(query,cb);
     })
 }
+//db query to view all cars posted by a particula agency
 module.exports.viewAllCars=function(table_name,obj,cb){
     connection.getConnection(function(err){
         if(err){
@@ -48,6 +54,8 @@ module.exports.viewAllCars=function(table_name,obj,cb){
         connection.query(query,cb);
     })
 }
+//db query to view customer info of a customer who has booked a particular car
+//Uses foreign key concept
 module.exports.viewCustomerInfoByAgency=function(obj,cb){
     connection.getConnection(function(err){
         if(err){
@@ -58,6 +66,7 @@ module.exports.viewCustomerInfoByAgency=function(obj,cb){
         connection.query(query,cb);
     })
 }
+//db query to view all the booked cars of a particular agency
 module.exports.viewBookedCars=function(table_name,obj,cb){
     connection.getConnection(function(err){
         if(err){
@@ -68,6 +77,7 @@ module.exports.viewBookedCars=function(table_name,obj,cb){
         connection.query(query,cb);
     })
 }
+//db query to fetch car details by vehicle_no(primary key)
 module.exports.getCar=function(table_name,obj,cb){
     connection.getConnection(function(err){
         if(err){
@@ -78,6 +88,7 @@ module.exports.getCar=function(table_name,obj,cb){
         connection.query(query,cb);
     })
 }
+//db query to edit car information
 module.exports.editCar=function(table_name,obj,where,cb){
     connection.getConnection(function(err){
         if(err){
@@ -88,6 +99,7 @@ module.exports.editCar=function(table_name,obj,where,cb){
             connection.query(query,cb);
     })
 }
+//db query to delete car information
 module.exports.deleteCar=function(table_name,obj,cb){
     connection.getConnection(function(err){
         if(err){
@@ -98,6 +110,7 @@ module.exports.deleteCar=function(table_name,obj,cb){
             connection.query(query,cb);
     })
 }
+//db query to show all available cars to everyone
 module.exports.viewAll=function(table_name,cb){
     connection.getConnection(function(err){
         if(err){
@@ -108,6 +121,7 @@ module.exports.viewAll=function(table_name,cb){
         connection.query(query,cb);
     })
 }
+//db query for adding an entry in booked_cars table
 module.exports.bookCar=function(table_name,obj,cb){
     connection.getConnection(function(err){
         if(err){
@@ -118,6 +132,7 @@ module.exports.bookCar=function(table_name,obj,cb){
         connection.query(query,cb);
     })
 }
+//db query to update status from Available to booked
 module.exports.updateStatus=function(table_name,where,cb){
     connection.getConnection(function(err){
         if(err){
@@ -128,6 +143,7 @@ module.exports.updateStatus=function(table_name,where,cb){
             connection.query(query,cb);
     })
 }
+//db query to view all booked cars by user
 module.exports.viewBookedCarsByUser=function(table_name,obj,cb){
     connection.getConnection(function(err){
         if(err){

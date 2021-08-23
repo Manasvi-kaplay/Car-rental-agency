@@ -1,3 +1,4 @@
+//This file contains the routes to all other files of controller
 var express=require("express");
 var router=express.Router();
 router.use('/home',require("./home"));

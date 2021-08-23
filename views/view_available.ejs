@@ -1,0 +1,36 @@
+<center>
+<h3>List of available cars:</h3>
+        <table class="table table-hover">
+          <thead>
+          <tr>
+              <th style="text-align:center">Vehicle No.</th>
+              <th style="text-align:center">Vehicle model</th>
+              <th style="text-align:center">Seating capacity</th>
+              <th style="text-align:center">Rent</th>
+              <th style="text-align:center">Status</th>
+              </tr>
+              </thead>
+              <tbody>
+              <% result.forEach(function(x){ %>
+                  <tr>
+                      <td><%=x.vehicle_no%></td>
+                      <td><%=x.vehicle_model%></td>
+                      <td><%=x.seating_capacity%></td>
+                      <td><%=x.rent%></td>
+                      <td><%=x.status%></td>
+                      <td>
+                        <form method="POST" action="/home/viewAgencyDetails">
+                          <input type="hidden" value="<%=x.agency_id%>" name="agency_id">
+                          <input type="hidden" value="<%=x.vehicle_no%>" name="vehicle_no">
+                          <input type="hidden" value="<%=x.vehicle_model%>" name="vehicle_model">
+                          <input type="hidden" value="<%=x.seating_capacity%>" name="seating_capacity">
+                          <input type="hidden" value="<%=x.rent%>" name="rent">
+                          <button type="submit">View agency details</button>
+                        </form>
+                      </td>  
+                  </tr>
+              <%})%>
+              </tbody>
+      </table>
+      <h4>Please note that a car can be booked only after signup/signin.</h4>
+    </center>
