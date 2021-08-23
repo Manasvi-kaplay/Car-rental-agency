@@ -8,7 +8,7 @@
     <div id="myForm">
         <form action="/users/book" class="form-container" method="post">
           <label for="name"><b>Start date</b></label>
-          <input type="date" placeholder="Enter start date" name="start_date" required>
+          <input type="date" min="" placeholder="Enter start date" name="start_date" required>
           <label for="address"><b>No. of days:</b></label>
           <input type="number" placeholder="Enter no of days" name="no_of_days" required>
           <input type="hidden" value="<%=vehicle_no%>" name="vehicle_no" required>

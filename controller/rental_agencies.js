@@ -25,7 +25,7 @@ router.post('/signin',function(req,res){
         if(err){
             res.send(err)
         }
-        console.log("result from db..",result);
+        //console.log("result from db..",result);
         if(result.length>0){
             if(result[0].password==req.body.upass){
                 req.session.email=result[0].email;
