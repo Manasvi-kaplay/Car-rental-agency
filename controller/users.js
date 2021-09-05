@@ -151,15 +151,8 @@ router.get('/viewOtherInfo',function(req,res){
             res.send("Try again later!");
         }
         if(result){
-            allQueries.getProfile("rental_agencies",{id:result[0].agency_id},function(err2,result2){
-                if(err2){
-                    res.send("Try again later!");
-                }
-                if(result2){
-                    var pagedata={"title":"View other details","pagename":"car+agency_info",car:result[0],agency:result2[0]};
-                    res.render("layout",pagedata);
-                }
-        })
+                var pagedata={"title":"View other details","pagename":"car+agency_info",car:result[0]};
+                res.render("layout",pagedata);
         }
     })
 })

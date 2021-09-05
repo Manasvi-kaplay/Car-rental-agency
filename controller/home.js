@@ -4,7 +4,7 @@ var allQueries=require("../model/allQueries");
 //get API to call Home page
 router.get('/page',function(req,res){
     //req.session.destroy();
-    if(req.session){
+    if(req.session.email){
         console.log("yuyu",req.session);
     }
     var pagedata={"title":"Home page","pagename":"home"};
@@ -25,7 +25,7 @@ router.get('/view',function(req,res){
 })
 //post API to retrieve agency details (agency which posted the car)
 router.post('/viewAgencyDetails',function(req,res){
-    //console.log("req.body: ",req.body);
+    console.log("req.body: ",req.body);
     allQueries.getProfile("rental_agencies",{id:req.body.agency_id},function(err,result){
         if(err){
             res.send("Agency details not available");
